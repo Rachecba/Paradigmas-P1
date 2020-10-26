@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package proyecto;
 
-/**
- *
- * @author Michael
- */
+import java.util.Stack;
+
 public class Expresion {
 
     private String expresion;
@@ -25,7 +19,24 @@ public class Expresion {
         this.expresion = expresion;
     }
     
-    boolean validar_expresion(String expresion){
-        return true;
+    boolean validar_expresion(){
+        Stack pila = new Stack();
+        int tam = expresion.length();
+        int i = 0;
+        while(i < tam){
+           if(this.expresion.charAt(i)=='('){
+               pila.push('(');
+           }else if(this.expresion.charAt(i)==')'){
+               if(pila.empty())
+                   break;
+               else
+                   pila.pop();
+           }
+           i++;
+        }
+        if(pila.empty()&&i==tam)
+            return true;
+        else
+            return false;
     }
 }

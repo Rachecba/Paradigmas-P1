@@ -20,7 +20,11 @@ public class Proyecto {
         view.setVisible(true);
         String exp = "(p^q)v(p^r)v(q^r)";
         Expresion expresion = new Expresion(exp);
-
+        if(expresion.validar_expresion()==true){
+            System.out.println("CORRECTO");
+        }else{
+            System.out.println("INCORRECTO");
+        }
     }
     
     boolean validar_expresion(String expresion){
