@@ -11,9 +11,9 @@ package proyecto;
  */
 public class Principal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Ventana
-     */
+    int cont = 0;
+    int initX, initY = 50;
+    
     public Principal() {
         initComponents();
     }
@@ -29,19 +29,13 @@ public class Principal extends javax.swing.JFrame {
 
         jToolBar1 = new javax.swing.JToolBar();
         file = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jInternalFrame2 = new javax.swing.JInternalFrame();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        open = new javax.swing.JButton();
+        save = new javax.swing.JButton();
+        print = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        archivo = new javax.swing.JMenu();
+        cargar = new javax.swing.JMenuItem();
+        guardar = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -56,99 +50,50 @@ public class Principal extends javax.swing.JFrame {
         file.setFocusable(false);
         file.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         file.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        file.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fileMouseClicked(evt);
+            }
+        });
         jToolBar1.add(file);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/open.png"))); // NOI18N
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton2);
-
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/diskette.png"))); // NOI18N
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton3);
-
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/printer.png"))); // NOI18N
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton4);
-
-        jInternalFrame2.setClosable(true);
-        jInternalFrame2.setIconifiable(true);
-        jInternalFrame2.setMaximizable(true);
-        jInternalFrame2.setResizable(true);
-        jInternalFrame2.setTitle("Formula 0");
-        jInternalFrame2.setVisible(true);
-
-        jButton1.setText("Verificar");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        open.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/open.png"))); // NOI18N
+        open.setFocusable(false);
+        open.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        open.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        open.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                openMouseClicked(evt);
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        });
+        jToolBar1.add(open);
 
-        javax.swing.GroupLayout jInternalFrame2Layout = new javax.swing.GroupLayout(jInternalFrame2.getContentPane());
-        jInternalFrame2.getContentPane().setLayout(jInternalFrame2Layout);
-        jInternalFrame2Layout.setHorizontalGroup(
-            jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jInternalFrame2Layout.createSequentialGroup()
-                .addContainerGap(65, Short.MAX_VALUE)
-                .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(jInternalFrame2Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))))
-        );
-        jInternalFrame2Layout.setVerticalGroup(
-            jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jInternalFrame2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(193, Short.MAX_VALUE))
-        );
+        save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/diskette.png"))); // NOI18N
+        save.setFocusable(false);
+        save.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        save.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        save.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                saveMouseClicked(evt);
+            }
+        });
+        jToolBar1.add(save);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(jInternalFrame2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(547, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jInternalFrame2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(160, Short.MAX_VALUE))
-        );
+        print.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/printer.png"))); // NOI18N
+        print.setFocusable(false);
+        print.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        print.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(print);
 
-        jMenu1.setText("Archivo");
+        archivo.setText("Archivo");
 
-        jMenuItem1.setText("Cargar");
-        jMenu1.add(jMenuItem1);
+        cargar.setText("Cargar");
+        archivo.add(cargar);
 
-        jMenuItem2.setText("Guardar");
-        jMenu1.add(jMenuItem2);
+        guardar.setText("Guardar");
+        archivo.add(guardar);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(archivo);
 
         jMenu2.setText("Edición");
         jMenuBar1.add(jMenu2);
@@ -171,20 +116,44 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 993, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(574, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveMouseClicked
+
+    private void openMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_openMouseClicked
+
+    private void fileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fileMouseClicked
+        InternalFrame frame = new InternalFrame("Formula" + cont);
+        frame.setVisible(true);
+        frame.setLocation(initX, initY);
+
+        this.getContentPane().add(frame);
+        try {
+            frame.setSelected(true);
+            frame.toFront();
+        } catch (java.beans.PropertyVetoException e) {
+        }
+
+        initX += 100;
+        initY += 100;
+        cont++;
+    }//GEN-LAST:event_fileMouseClicked
+
+    
     /**
      * @param args the command line arguments
      */
@@ -222,25 +191,22 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu archivo;
+    private javax.swing.JMenuItem cargar;
     private javax.swing.JButton file;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JInternalFrame jInternalFrame2;
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem guardar;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JButton open;
+    private javax.swing.JButton print;
+    private javax.swing.JButton save;
     // End of variables declaration//GEN-END:variables
+
+
+
 }
