@@ -6,6 +6,7 @@ import java.util.Stack;
 public class Expresion {
 
     private String expresion;
+
     
     public Expresion(String expresion){
         this.expresion = expresion;
