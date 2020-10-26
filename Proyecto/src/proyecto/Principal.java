@@ -32,6 +32,8 @@ public class Principal extends javax.swing.JFrame {
         open = new javax.swing.JButton();
         save = new javax.swing.JButton();
         print = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtarea = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         archivo = new javax.swing.JMenu();
         cargar = new javax.swing.JMenuItem();
@@ -85,6 +87,10 @@ public class Principal extends javax.swing.JFrame {
         print.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(print);
 
+        txtarea.setColumns(20);
+        txtarea.setRows(5);
+        jScrollPane1.setViewportView(txtarea);
+
         archivo.setText("Archivo");
 
         cargar.setText("Cargar");
@@ -117,12 +123,18 @@ public class Principal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 993, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 842, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(574, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(150, Short.MAX_VALUE))
         );
 
         pack();
@@ -201,10 +213,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JButton open;
     private javax.swing.JButton print;
     private javax.swing.JButton save;
+    private javax.swing.JTextArea txtarea;
     // End of variables declaration//GEN-END:variables
 
 
