@@ -124,9 +124,24 @@ public class InternalFrame extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void verificarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verificarBtnMouseClicked
-        // TODO add your handling code here:
+        String exp = this.field.getText();
+        Expresion expresion = new Expresion(exp);
+        
+        if(expresion.validar_expresion()==true){
+            System.out.println("CORRECTO");
+        }else{
+            System.out.println("INCORRECTO");
+        }
+        
     }//GEN-LAST:event_verificarBtnMouseClicked
 
+    public void tablaVerdad(){}
+    
+    public void mintermino(){}
+    
+    public void maxtermino(){}
+    
+    public void simplificar(){}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField field;
