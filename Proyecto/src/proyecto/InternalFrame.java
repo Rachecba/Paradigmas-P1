@@ -45,6 +45,11 @@ public class InternalFrame extends javax.swing.JInternalFrame {
         setMaximizable(true);
 
         verificarBtn.setText("Verificar");
+        verificarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                verificarBtnMouseClicked(evt);
+            }
+        });
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -117,6 +122,10 @@ public class InternalFrame extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void verificarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verificarBtnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_verificarBtnMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
