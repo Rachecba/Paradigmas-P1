@@ -18,6 +18,13 @@ public class Proyecto {
         Principal view = new Principal();
         
         view.setVisible(true);
+        String exp = "(p^q)v(p^r)v(q^r)";
+        Expresion expresion = new Expresion(exp);
+
+    }
+    
+    boolean validar_expresion(String expresion){
+        return true;
     }
     
 }
