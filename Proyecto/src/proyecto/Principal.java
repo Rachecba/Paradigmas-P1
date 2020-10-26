@@ -5,19 +5,63 @@
  */
 package proyecto;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author rbasu
  */
 public class Principal extends javax.swing.JFrame {
-
+    JFileChooser seleccionar = new JFileChooser();
+    File archivos;
+    FileInputStream entrada;
+    FileOutputStream salida;
     int cont = 0;
     int initX, initY = 50;
     
     public Principal() {
         initComponents();
     }
+//Abrir Archivo
 
+    public String AbrirArchivo(File archivos) {
+        String documento = "";
+        try {
+            entrada = new FileInputStream(archivos);
+            int ascci;
+            while ((ascci = entrada.read()) != -1) {
+                char caracter = (char) ascci;
+                documento += caracter;
+
+            }
+
+        } catch (Exception e) {
+
+        }
+        return documento;
+
+    }
+
+    //Guardar Archivo
+    public String
+
+    GuardarArchivo(File archivos, String documento) {
+        String mensaje = null;
+        try {
+            salida = new FileOutputStream(archivos);
+            byte[] bytxt = documento.getBytes();
+            salida.write(bytxt);
+            mensaje = "Archivo Guardado";
+
+        } catch (Exception e) {
+        }
+        return mensaje;
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,8 +80,8 @@ public class Principal extends javax.swing.JFrame {
         txtarea = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         archivo = new javax.swing.JMenu();
-        cargar = new javax.swing.JMenuItem();
-        guardar = new javax.swing.JMenuItem();
+        btnAbrir = new javax.swing.JMenuItem();
+        btnGuardar = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -93,11 +137,21 @@ public class Principal extends javax.swing.JFrame {
 
         archivo.setText("Archivo");
 
-        cargar.setText("Cargar");
-        archivo.add(cargar);
+        btnAbrir.setText("Cargar");
+        btnAbrir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAbrirActionPerformed(evt);
+            }
+        });
+        archivo.add(btnAbrir);
 
-        guardar.setText("Guardar");
-        archivo.add(guardar);
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        archivo.add(btnGuardar);
 
         jMenuBar1.add(archivo);
 
@@ -164,6 +218,42 @@ public class Principal extends javax.swing.JFrame {
         initY += 100;
         cont++;
     }//GEN-LAST:event_fileMouseClicked
+//Accion del boton cargar 
+    private void btnAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirActionPerformed
+     if (seleccionar.showDialog(null, "Abrir") == JFileChooser.APPROVE_OPTION) {
+
+            archivos = seleccionar.getSelectedFile();
+            if (archivos.canRead()) {
+                if (archivos.getName().endsWith("txt")) {
+                    String documento = AbrirArchivo(archivos);
+                    txtarea.setText(documento);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Archivo No compatible");
+
+                }
+
+            }
+        }
+    }//GEN-LAST:event_btnAbrirActionPerformed
+//Accion del boton guardar
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+          if (seleccionar.showDialog(null, "Guardar") == JFileChooser.APPROVE_OPTION) {
+            archivos = seleccionar.getSelectedFile();
+            if (archivos.getName().endsWith("txt")) {
+               String Documento=txtarea.getText(); 
+               String mensaje=GuardarArchivo(archivos,Documento);
+               if(mensaje!=null){
+               JOptionPane.showMessageDialog(null,mensaje);
+               }else{
+               
+               JOptionPane.showMessageDialog(null,"Archivo No Compatible");
+               }
+            }else{
+            JOptionPane.showMessageDialog(null,"Guardar Documento de Texto");
+            }
+
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     
     /**
@@ -204,9 +294,9 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu archivo;
-    private javax.swing.JMenuItem cargar;
+    private javax.swing.JMenuItem btnAbrir;
+    private javax.swing.JMenuItem btnGuardar;
     private javax.swing.JButton file;
-    private javax.swing.JMenuItem guardar;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
