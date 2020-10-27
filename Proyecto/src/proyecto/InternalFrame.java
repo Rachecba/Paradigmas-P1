@@ -6,6 +6,8 @@
 package proyecto;
 
 import java.awt.FlowLayout;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -81,7 +83,7 @@ TablaVerdad tabla_verdad = new TablaVerdad();
         ));
         jScrollPane1.setViewportView(table);
 
-        jLabel1.setText("Mintérminos");
+        jLabel1.setText("Forma Canónica Disyuntiva");
 
         minList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -90,7 +92,7 @@ TablaVerdad tabla_verdad = new TablaVerdad();
         });
         jScrollPane2.setViewportView(minList);
 
-        jLabel2.setText("Maxtérminos");
+        jLabel2.setText("Forma Canónica Conjuntiva");
 
         maxList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -126,15 +128,15 @@ TablaVerdad tabla_verdad = new TablaVerdad();
                     .addComponent(verificarBtn))
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -154,7 +156,7 @@ TablaVerdad tabla_verdad = new TablaVerdad();
              JOptionPane.showMessageDialog(null,"  Expresion Incorrecta!!");
         }
         tablaVerdad();
-
+        mintermino();
         
     }//GEN-LAST:event_verificarBtnMouseClicked
 
@@ -185,9 +187,60 @@ TablaVerdad tabla_verdad = new TablaVerdad();
         }
     }
     
-    public void mintermino(){}
+    public void mintermino(){
+        List variables = this.tabla_verdad.getVariables();
+        List terminos = new ArrayList();
+        String termino;
+        
+        for(int i = 0; i < table.getRowCount(); i++ ){ //Filas
+            termino = "";
+            termino = "MIN" + i + " = ";
+            
+            for(int j = 0; j < variables.size(); j++){ //Columnas
+                System.out.println("VALOR >> "+this.table.getValueAt(i, j));
+                
+                if(this.table.getValueAt(i, j).equals("V")){
+                    termino += this.table.getColumnName(j) + "'";
+                    
+                    System.out.println(this.table.getColumnName(j) + "'");
+                }else{
+                    termino += this.table.getColumnName(j);
+                    
+                    System.out.println(this.table.getColumnName(j));
+                }
+            }
+            
+            System.out.println(termino);
+            terminos.add(termino);
+            
+            //recorro la tabla hasta la ultima columna segun la cantidad de variables.
+            //si esa casilla es V, pongo el elemento como x' si es F lo pongo como x
+            //voy concatenando cada variable, hasta que alcance la ultima columna de la ultima variable
+            //despues la imprimo en pantalla, y hago lo mismo con la siguiente fila
+            //cuando se acaben las filas, me voy a la ULTIMA columna de la TABLA y si es V concateno esa fila en un String, sumandolo con el sig
+        }
+        
+        for(int i = 0; i < table.getRowCount(); i++){
+            String mintermino = "Forma Canónica Disyuntiva = ";
+            
+            if(table.getValueAt(i, table.getColumnCount()).equals("V")){
+                mintermino += "(" + terminos.get(i) + ")" + " + ";
+            }
+        }
+        
+    }
     
-    public void maxtermino(){}
+    public void maxtermino(){
+        List variables = this.tabla_verdad.getVariables();
+        
+        for(int i = 0; i < variables.size(); i++ ){
+            //recorro la tabla hasta la ultima columna segun la cantidad de variables.
+            //si esa casilla es F, pongo el elemento como x' si es V lo pongo como x
+            //voy concatenando cada variable, sumandolas, hasta que alcance la ultima columna de la ultima variable
+            //despues la imprimo en pantalla, y hago lo mismo con la siguiente fila
+            //cuando se acaben las filas, me voy a la ULTIMA columna de la TABLA y si es F concateno esa fila en un String, multiplocandolo con el sig
+        }
+    }
     
     public void simplificar(){}
 
