@@ -46,7 +46,7 @@ public class Expresion {
         int i = 0;
         while(i < tam){
            char aux = this.expresion.charAt(i);
-           if(aux!='¬'&&aux!=')'&&aux!='('&&aux!='∨'&&aux!='∧'&&aux!='⇒'&&aux!='⇔'&&aux!='p'&&aux!='q'&&aux!='r'&&aux!='s'&&aux!='+'&&aux!='*'){
+           if(aux!='¬'&&aux!=')'&&aux!='('&&aux!='∨'&&aux!='∧'&&aux!='⇒'&&aux!='⇔'&&aux!='+'&&aux!='*'){
                return false;
            }
            i++;
