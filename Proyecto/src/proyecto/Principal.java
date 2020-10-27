@@ -100,6 +100,11 @@ public class Principal extends javax.swing.JFrame {
                 fileMouseClicked(evt);
             }
         });
+        file.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileActionPerformed(evt);
+            }
+        });
         jToolBar1.add(file);
 
         open.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/open.png"))); // NOI18N
@@ -209,40 +214,44 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_fileMouseClicked
 //Accion del boton cargar 
     private void btnAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirActionPerformed
-//     if (seleccionar.showDialog(null, "Abrir") == JFileChooser.APPROVE_OPTION) {
-//
-//            archivos = seleccionar.getSelectedFile();
-//            if (archivos.canRead()) {
-//                if (archivos.getName().endsWith("txt")) {
-//                    String documento = AbrirArchivo(archivos);
-//                    txtarea.setText(documento);
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "Archivo No compatible");
-//
-//                }
-//
-//            }
-//        }
+     if (seleccionar.showDialog(null, "Abrir") == JFileChooser.APPROVE_OPTION) {
+
+            archivos = seleccionar.getSelectedFile();
+            if (archivos.canRead()) {
+                if (archivos.getName().endsWith("txt")) {
+                    String documento = AbrirArchivo(archivos);
+                    InternalFrame.field.setText(documento);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Archivo No compatible");
+
+                }
+
+            }
+        }
     }//GEN-LAST:event_btnAbrirActionPerformed
 //Accion del boton guardar
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-//          if (seleccionar.showDialog(null, "Guardar") == JFileChooser.APPROVE_OPTION) {
-//            archivos = seleccionar.getSelectedFile();
-//            if (archivos.getName().endsWith("txt")) {
-//               String Documento=txtarea.getText(); 
-//               String mensaje=GuardarArchivo(archivos,Documento);
-//               if(mensaje!=null){
-//               JOptionPane.showMessageDialog(null,mensaje);
-//               }else{
-//               
-//               JOptionPane.showMessageDialog(null,"Archivo No Compatible");
-//               }
-//            }else{
-//            JOptionPane.showMessageDialog(null,"Guardar Documento de Texto");
-//            }
-//
-//        }
+          if (seleccionar.showDialog(null, "Guardar") == JFileChooser.APPROVE_OPTION) {
+            archivos = seleccionar.getSelectedFile();
+            if (archivos.getName().endsWith("txt")) {
+               String Documento=InternalFrame.field.getText(); 
+               String mensaje=GuardarArchivo(archivos,Documento);
+               if(mensaje!=null){
+               JOptionPane.showMessageDialog(null,mensaje);
+               }else{
+               
+               JOptionPane.showMessageDialog(null,"Archivo No Compatible");
+               }
+            }else{
+            JOptionPane.showMessageDialog(null,"Guardar Documento de Texto");
+            }
+
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void fileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fileActionPerformed
 
     
     /**
