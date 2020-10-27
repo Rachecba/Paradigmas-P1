@@ -5,87 +5,170 @@
  */
 package proyecto;
 
-/**
- *
- * @author Michael
- */
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class TablaVerdad {
 
-    private boolean p[]={true,true,true,true,true,true,true,true,false,false,false,false,false,false,false,false};
-    private boolean q[]={true,true,true,true,false,false,false,false,true,true,true,true,false,false,false,false};
-    private boolean r[]={true,true,false,false,true,true,false,false,true,true,false,false,true,true,false,false};
-    private boolean s[]={true,false,true,false,true,false,true,false,true,false,true,false,true,false,true,false};
-    
-    public boolean[] getP() {
-        return p;
-    }
+    private int cantidad_filas;
+    private int cantidad_columnas;
+    private List variables;
+    private String expresion;
+    private boolean[][] tabla;
 
-    public void setP(boolean[] p) {
-        this.p = p;
-    }
-
-    public boolean[] getQ() {
-        return q;
-    }
-
-    public void setQ(boolean[] q) {
-        this.q = q;
-    }
-
-    public boolean[] getR() {
-        return r;
-    }
-
-    public void setR(boolean[] r) {
-        this.r = r;
-    }
-
-    public boolean[] getS() {
-        return s;
-    }
-
-    public void setS(boolean[] s) {
-        this.s = s;
+    public TablaVerdad(){
+        this.cantidad_filas = 0;
+        this.cantidad_columnas = 0;
+        this.variables = new ArrayList();
+        this.expresion = "";
+        this.tabla = new boolean[1][1];
     }
    
-    boolean[] calcular_negacion(boolean operador[]){
-        boolean vector_negado [] = {};
+    
+    public boolean[][] getTabla() {
+        return tabla;
+    }
+
+    public void setTabla(boolean[][] tabla) {
+        this.tabla = tabla;
+    }
+
+    public String getExpresion() {
+        return expresion;
+    }
+
+    public void setExpresion(String expresion) {
+        this.expresion = expresion;
+        this.variables = obtener_variables(expresion);
+        this.tabla = construccion_tabla(this.cantidad_filas);
+    }
+
+
+    public int getCantidad_filas() {
+        return cantidad_filas;
+    }
+
+    public void setCantidad_filas(int cantidad_filas) {
+        this.cantidad_filas = cantidad_filas;
+    }
+
+    public int getCantidad_columnas() {
+        return cantidad_columnas;
+    }
+
+    public void setCantidad_columnas(int cantidad_columnas) {
+        this.cantidad_columnas = cantidad_columnas;
+    }
+
+    public List getVariables() {
+        return variables;
+    }
+
+    public void setVariables(List variables) {
+        this.variables = variables;
+    }
+    
+    
+    private char[] calcular_negacion(char operador[]){
+        char vector_negado [] = {};
         for(int i = 0; i < 16;i++){
-            if(operador[i]==true)
-                vector_negado[i] = false;
+            if(operador[i]=='V')
+                vector_negado[i] = 'F';
             else
-                vector_negado[i] = true;
+                vector_negado[i] = 'V';
         }
         return vector_negado;
     }
     
-    boolean[] calcular_and(boolean operador1[], boolean operador2[]){
-        boolean vector_and [] = {};
-        for(int i = 0; i < 16;i++){
-            if(operador1[i]==true&&operador2[i]==true)
-                vector_and[i] = true;
-            else  if(operador1[i]==true&&operador2[i]==false)
-                vector_and[i] = false;
-            else  if(operador1[i]==false&&operador2[i]==true)
-                vector_and[i] = false;  
-            else  if(operador1[i]==false&&operador2[i]==false)
-                vector_and[i] = false;
+    public boolean[][] construccion_tabla(int tam){
+
+        this.cantidad_columnas=((int) Math.pow(2, tam));
+        boolean[][] tabla = new boolean[tam][cantidad_columnas];
+        int aux2 = 1;
+        int aux1 = cantidad_columnas / (int) Math.pow(2, aux2);
+        int cont = 0;
+        boolean b = true;
+        for (int i = 0; i < tam; i++) {
+            for (int j = 0; j < cantidad_columnas; j++) {
+                if (cont == aux1) {
+                    b = !b;
+                    cont = 0;
+                } tabla[i][j] = b;
+                cont++; 
+            }if (cont == aux1) {
+                b = !b;
+                cont = 0;
+            }aux2++;
+            aux1 = cantidad_columnas / (int) Math.pow(2, aux2);}
+        boolean[][] t2 = new boolean[cantidad_columnas][tam];
+        for(int i =0; i< cantidad_columnas; i++){
+            for(int j= 0; j< tam; j++){
+                t2[i][j] = tabla[j][i];
+            }
         }
-        return vector_and;
+        int x = this.cantidad_columnas;
+        this.cantidad_columnas=this.cantidad_filas;
+        this.cantidad_filas = x;
+        return t2;
     }
-        
-    boolean[] calcular_or(boolean operador1[], boolean operador2[]){
-         boolean vector_or [] = {};
-        for(int i = 0; i < 16;i++){
-            if(operador1[i]==true&&operador2[i]==true)
-                vector_or[i] = true;
-            else  if(operador1[i]==true&&operador2[i]==false)
-                vector_or[i] = true;
-            else  if(operador1[i]==false&&operador2[i]==true)
-                vector_or[i] = true;  
-            else  if(operador1[i]==false&&operador2[i]==false)
-                vector_or[i] = false;
+    
+//    private char[] calcular_and(char operador1[], char operador2[]){
+//        char vector_and [] = {};
+//        for(int i = 0; i < 16;i++){
+//            if(operador1[i]=='V'&&operador2[i]=='V')
+//                vector_and[i] = 'V';
+//            else  if(operador1[i]=='V'&&operador2[i]=='F')
+//                vector_and[i] = 'F';
+//            else  if(operador1[i]=='F'&&operador2[i]=='V')
+//                vector_and[i] = 'F';  
+//            else  if(operador1[i]=='F'&&operador2[i]=='F')
+//                vector_and[i] = 'F';
+//        }
+//        return vector_and;
+//    }
+    
+    public char obtener_posicion(int i, int j){
+        char posicion = 'F';
+        if(this.tabla[i][j]==true){
+            posicion='V';
         }
-        return vector_or;
+        return posicion;
+    } 
+//    private char[] calcular_or(char operador1[], char operador2[]){
+//         char vector_or [] = {};
+//        for(int i = 0; i < 16;i++){
+//            if(operador1[i]=='V'&&operador2[i]=='V')
+//                vector_or[i] = 'V';
+//            else  if(operador1[i]=='V'&&operador2[i]=='F')
+//                vector_or[i] = 'V';
+//            else  if(operador1[i]=='F'&&operador2[i]=='V')
+//                vector_or[i] = 'V';  
+//            else  if(operador1[i]=='F'&&operador2[i]=='F')
+//                vector_or[i] = 'F';
+//        }
+//        return vector_or;
+//    }
+
+    public List obtener_variables(String exp) {
+        List variables = new ArrayList();
+        for(int i = 0; i< exp.length(); i++){
+            if(!this.validar_operadores(String.valueOf(exp.charAt(i)))){
+                variables.add(exp.charAt(i));
+            }
+        }
+        this.cantidad_filas = (variables.size());
+        return variables;
+    }
+    
+    private boolean validar_operadores(String caracter) {
+
+        if (caracter.equals("<") || caracter.equals("=") || caracter.equals("-") || caracter.equals(">")||
+                caracter.equals("+") || caracter.equals("*")|| caracter.equals(")") || caracter.equals("(")||
+                caracter.equals("#") || caracter.equals("¬")|| caracter.equals("∧") || caracter.equals("∨")|| 
+                caracter.equals("⇒") || caracter.equals("⇔"))
+            return true;
+         else 
+            return false;
     }
 }

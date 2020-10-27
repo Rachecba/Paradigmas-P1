@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
+
 /**
  *
  * @author rbasu
@@ -76,8 +77,6 @@ public class Principal extends javax.swing.JFrame {
         open = new javax.swing.JButton();
         save = new javax.swing.JButton();
         print = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtarea = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         archivo = new javax.swing.JMenu();
         btnAbrir = new javax.swing.JMenuItem();
@@ -131,10 +130,6 @@ public class Principal extends javax.swing.JFrame {
         print.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(print);
 
-        txtarea.setColumns(20);
-        txtarea.setRows(5);
-        jScrollPane1.setViewportView(txtarea);
-
         archivo.setText("Archivo");
 
         btnAbrir.setText("Cargar");
@@ -177,18 +172,12 @@ public class Principal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 993, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 842, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addContainerGap(574, Short.MAX_VALUE))
         );
 
         pack();
@@ -220,39 +209,39 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_fileMouseClicked
 //Accion del boton cargar 
     private void btnAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirActionPerformed
-     if (seleccionar.showDialog(null, "Abrir") == JFileChooser.APPROVE_OPTION) {
-
-            archivos = seleccionar.getSelectedFile();
-            if (archivos.canRead()) {
-                if (archivos.getName().endsWith("txt")) {
-                    String documento = AbrirArchivo(archivos);
-                    txtarea.setText(documento);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Archivo No compatible");
-
-                }
-
-            }
-        }
+//     if (seleccionar.showDialog(null, "Abrir") == JFileChooser.APPROVE_OPTION) {
+//
+//            archivos = seleccionar.getSelectedFile();
+//            if (archivos.canRead()) {
+//                if (archivos.getName().endsWith("txt")) {
+//                    String documento = AbrirArchivo(archivos);
+//                    txtarea.setText(documento);
+//                } else {
+//                    JOptionPane.showMessageDialog(null, "Archivo No compatible");
+//
+//                }
+//
+//            }
+//        }
     }//GEN-LAST:event_btnAbrirActionPerformed
 //Accion del boton guardar
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-          if (seleccionar.showDialog(null, "Guardar") == JFileChooser.APPROVE_OPTION) {
-            archivos = seleccionar.getSelectedFile();
-            if (archivos.getName().endsWith("txt")) {
-               String Documento=txtarea.getText(); 
-               String mensaje=GuardarArchivo(archivos,Documento);
-               if(mensaje!=null){
-               JOptionPane.showMessageDialog(null,mensaje);
-               }else{
-               
-               JOptionPane.showMessageDialog(null,"Archivo No Compatible");
-               }
-            }else{
-            JOptionPane.showMessageDialog(null,"Guardar Documento de Texto");
-            }
-
-        }
+//          if (seleccionar.showDialog(null, "Guardar") == JFileChooser.APPROVE_OPTION) {
+//            archivos = seleccionar.getSelectedFile();
+//            if (archivos.getName().endsWith("txt")) {
+//               String Documento=txtarea.getText(); 
+//               String mensaje=GuardarArchivo(archivos,Documento);
+//               if(mensaje!=null){
+//               JOptionPane.showMessageDialog(null,mensaje);
+//               }else{
+//               
+//               JOptionPane.showMessageDialog(null,"Archivo No Compatible");
+//               }
+//            }else{
+//            JOptionPane.showMessageDialog(null,"Guardar Documento de Texto");
+//            }
+//
+//        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     
@@ -303,12 +292,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JButton open;
     private javax.swing.JButton print;
     private javax.swing.JButton save;
-    private javax.swing.JTextArea txtarea;
     // End of variables declaration//GEN-END:variables
 
 
