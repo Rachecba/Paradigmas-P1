@@ -55,6 +55,12 @@ TablaVerdad tabla_verdad = new TablaVerdad();
         setIconifiable(true);
         setMaximizable(true);
 
+        field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldActionPerformed(evt);
+            }
+        });
+
         verificarBtn.setText("Verificar");
         verificarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -136,11 +142,13 @@ TablaVerdad tabla_verdad = new TablaVerdad();
 
     private void verificarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verificarBtnMouseClicked
         String exp = this.field.getText();
-        this.tabla_verdad.setExpresion(exp);
+        
+//        this.tabla_verdad.setExpresion(exp);
         Expresion expresion = new Expresion(exp);
         
         if(expresion.validar_expresion(exp)==true){
              JOptionPane.showMessageDialog(null,"  Expresion Correcta!!");
+             this.tabla_verdad.setExpresion(exp);
         }else{
            
              JOptionPane.showMessageDialog(null,"  Expresion Incorrecta!!");
@@ -150,9 +158,14 @@ TablaVerdad tabla_verdad = new TablaVerdad();
         
     }//GEN-LAST:event_verificarBtnMouseClicked
 
+    private void fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldActionPerformed
+
     public void tablaVerdad(){
         System.out.println("Mostrando Tabla");
         DefaultTableModel model = new DefaultTableModel();
+        
         model.setColumnIdentifiers(this.tabla_verdad.getVariables().toArray());
 
         
