@@ -5,6 +5,10 @@
  */
 package proyecto;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author rbasu
@@ -48,6 +52,11 @@ public class InternalFrame extends javax.swing.JInternalFrame {
         verificarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 verificarBtnMouseClicked(evt);
+            }
+        });
+        verificarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verificarBtnActionPerformed(evt);
             }
         });
 
@@ -127,13 +136,21 @@ public class InternalFrame extends javax.swing.JInternalFrame {
         String exp = this.field.getText();
         Expresion expresion = new Expresion(exp);
         
-        if(expresion.validar_expresion()==true){
-            System.out.println("CORRECTO");
+        if(expresion.validar_expresion(exp)==true){
+           JOptionPane.showMessageDialog(null," Expresion Correcta!");
         }else{
-            System.out.println("INCORRECTO");
+             JOptionPane.showMessageDialog(null,  "  Expresion Incorecto!!");
         }
         
+        
+        
+    
+        
     }//GEN-LAST:event_verificarBtnMouseClicked
+
+    private void verificarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verificarBtnActionPerformed
+ 
+    }//GEN-LAST:event_verificarBtnActionPerformed
 
     public void tablaVerdad(){}
     
