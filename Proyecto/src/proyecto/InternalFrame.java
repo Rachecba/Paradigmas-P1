@@ -74,6 +74,11 @@ public class InternalFrame extends javax.swing.JInternalFrame {
                 verificarBtnMouseClicked(evt);
             }
         });
+        verificarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verificarBtnActionPerformed(evt);
+            }
+        });
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -172,6 +177,10 @@ public class InternalFrame extends javax.swing.JInternalFrame {
     private void fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldActionPerformed
+
+    private void verificarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verificarBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_verificarBtnActionPerformed
 
     public void tablaVerdad(){
         System.out.println("Mostrando Tabla");
@@ -305,7 +314,7 @@ public class InternalFrame extends javax.swing.JInternalFrame {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField field;
+    public static javax.swing.JTextField field;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
