@@ -7,6 +7,7 @@ package proyecto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 
 public class TablaVerdad {
@@ -16,6 +17,7 @@ public class TablaVerdad {
     private List variables;
     private String expresion;
     private boolean[][] tabla;
+   
 
     public TablaVerdad(){
         this.cantidad_filas = 0;
@@ -167,6 +169,24 @@ public class TablaVerdad {
         List operaciones = new ArrayList();
         String operacion = "";
         
+        Stack<String> operadores = new Stack<String>();
+        Stack<String> variables = new Stack<String>();
+        
+        for(int i = 0; i < exp.length(); i++){
+            if(String.valueOf(exp.charAt(i)).equals('(') || String.valueOf(exp.charAt(i)).equals(')')){}
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        //************************************************************
+        
         for(int i = 0; i < exp.length(); i++){
             //agarrar la operacion a la izquierda de la flecha
             if(!String.valueOf(exp.charAt(i)).equals("⇒") || !String.valueOf(exp.charAt(i)).equals("⇔")){
@@ -176,6 +196,7 @@ public class TablaVerdad {
             operaciones.add(operacion); //agrego la operacion a la izq de la flecha a la lista
             
             //agregar las demas operaciones
+            
         }
         
         return operaciones;
@@ -195,7 +216,7 @@ public class TablaVerdad {
         return identifiers;
     }
     
-    private boolean validar_operadores(String caracter) {
+    private boolean validar_operadores(String caracter) {   
 
         if (caracter.equals("<") || caracter.equals("=") || caracter.equals("-") || caracter.equals(">")||
                 caracter.equals("+") || caracter.equals("*")|| caracter.equals(")") || caracter.equals("(")||

@@ -8,6 +8,7 @@ package proyecto;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -27,13 +28,17 @@ import javax.swing.table.DefaultTableModel;
  */
 public class InternalFrame extends javax.swing.JInternalFrame {
 
-TablaVerdad tabla_verdad = new TablaVerdad();
+    TablaVerdad tabla_verdad = new TablaVerdad();
+    DefaultListModel modeloMin = new DefaultListModel();
+    DefaultListModel modeloMax = new DefaultListModel();
 
     public InternalFrame(String title) {
         
         initComponents();
         this.setTitle(title);
         this.setVisible(true);
+        this.minList.setModel(modeloMin);
+        this.maxList.setModel(modeloMax);
 
     }
 
@@ -105,19 +110,22 @@ TablaVerdad tabla_verdad = new TablaVerdad();
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(field, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                        .addComponent(verificarBtn))
-                    .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
-                    .addComponent(jLabel2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(field, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(23, 23, 23)
+                                .addComponent(verificarBtn))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(0, 288, Short.MAX_VALUE))
                     .addComponent(jScrollPane3))
-                .addContainerGap(300, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,6 +165,7 @@ TablaVerdad tabla_verdad = new TablaVerdad();
         }
         tablaVerdad();
         mintermino();
+        maxtermino();
         
     }//GEN-LAST:event_verificarBtnMouseClicked
 
@@ -192,26 +201,22 @@ TablaVerdad tabla_verdad = new TablaVerdad();
         List variables = this.tabla_verdad.getVariables();
         List terminos = new ArrayList();
         String termino;
+        String mintermino = "";
+        String cont = "";
         
         for(int i = 0; i < table.getRowCount(); i++ ){ //Filas
             termino = "";
-            termino = "MIN" + i + " = ";
+            cont = "m" + i + " = ";
             
             for(int j = 0; j < variables.size(); j++){ //Columnas
-                System.out.println("VALOR >> "+this.table.getValueAt(i, j));
-                
-                if(this.table.getValueAt(i, j).equals("V")){
-                    termino += this.table.getColumnName(j) + "'";
-                    
-                    System.out.println(this.table.getColumnName(j) + "'");
+                if(this.table.getValueAt(i, j).equals('V')){
+                    termino += this.table.getColumnName(j) + "¬";
                 }else{
                     termino += this.table.getColumnName(j);
-                    
-                    System.out.println(this.table.getColumnName(j));
                 }
             }
             
-            System.out.println(termino);
+            modeloMin.addElement(cont + termino);
             terminos.add(termino);
             
             //recorro la tabla hasta la ultima columna segun la cantidad de variables.
@@ -221,26 +226,59 @@ TablaVerdad tabla_verdad = new TablaVerdad();
             //cuando se acaben las filas, me voy a la ULTIMA columna de la TABLA y si es V concateno esa fila en un String, sumandolo con el sig
         }
         
+        mintermino = "Forma Canónica Disyuntiva = ";
+        
         for(int i = 0; i < table.getRowCount(); i++){
-            String mintermino = "Forma Canónica Disyuntiva = ";
             
-            if(table.getValueAt(i, table.getColumnCount()).equals("V")){
+            if(table.getValueAt(i, table.getColumnCount()-1).equals('V')){
                 mintermino += "(" + terminos.get(i) + ")" + " + ";
             }
         }
         
+        modeloMin.addElement(mintermino);
+
     }
     
     public void maxtermino(){
         List variables = this.tabla_verdad.getVariables();
+        List terminos = new ArrayList();
+        String termino;
+        String maxtermino = "";
+        String cont = "";
         
-        for(int i = 0; i < variables.size(); i++ ){
+        for(int i = 0; i < table.getRowCount(); i++ ){ //Filas
+            termino = "";
+            cont = "m" + i + " = ";
+            
+            for(int j = 0; j < variables.size(); j++){ //Columnas
+                if(this.table.getValueAt(i, j).equals('V')){
+                    termino += this.table.getColumnName(j) + " + ";
+                }else{
+                    termino += this.table.getColumnName(j) + "¬ + ";
+                }
+            }
+            
+            modeloMax.addElement(cont + termino);
+            terminos.add(termino);
+            
             //recorro la tabla hasta la ultima columna segun la cantidad de variables.
             //si esa casilla es F, pongo el elemento como x' si es V lo pongo como x
             //voy concatenando cada variable, sumandolas, hasta que alcance la ultima columna de la ultima variable
             //despues la imprimo en pantalla, y hago lo mismo con la siguiente fila
-            //cuando se acaben las filas, me voy a la ULTIMA columna de la TABLA y si es F concateno esa fila en un String, multiplocandolo con el sig
+            //cuando se acaben las filas, me voy a la ULTIMA columna de la TABLA y si es F concateno esa fila en un String, multiplicandolo con el sig
         }
+        
+        maxtermino = "Forma Canónica Conjuntiva = ";
+        
+        for(int i = 0; i < table.getRowCount(); i++){
+            
+            if(table.getValueAt(i, table.getColumnCount()-1).equals('F')){
+                maxtermino += "(" + terminos.get(i) + ") ";
+            }
+        }
+        
+        modeloMax.addElement(maxtermino);
+           
     }
     
     public void simplificar(){}
