@@ -203,7 +203,6 @@ TablaVerdad tabla_verdad = new TablaVerdad();
         String termino;
         
         for(int i = 0; i < table.getRowCount(); i++ ){ //Filas
-            termino = "";
             termino = "MIN" + i + " = ";
             
             for(int j = 0; j < variables.size(); j++){ //Columnas
