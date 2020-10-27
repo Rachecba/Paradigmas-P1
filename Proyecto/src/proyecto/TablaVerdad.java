@@ -101,12 +101,14 @@ public class TablaVerdad {
                 cont = 0;
             }aux2++;
             aux1 = cantidad_columnas / (int) Math.pow(2, aux2);}
+        
         boolean[][] t2 = new boolean[cantidad_columnas][tam];
         for(int i =0; i< cantidad_columnas; i++){
             for(int j= 0; j< tam; j++){
                 t2[i][j] = tabla[j][i];
             }
         }
+        
         int x = this.cantidad_columnas;
         this.cantidad_columnas=this.cantidad_filas;
         this.cantidad_filas = x;
@@ -159,6 +161,38 @@ public class TablaVerdad {
         }
         this.cantidad_filas = (variables.size());
         return variables;
+    }
+    
+    public List obtener_operaciones(String exp){
+        List operaciones = new ArrayList();
+        String operacion = "";
+        
+        for(int i = 0; i < exp.length(); i++){
+            //agarrar la operacion a la izquierda de la flecha
+            if(!String.valueOf(exp.charAt(i)).equals("⇒") || !String.valueOf(exp.charAt(i)).equals("⇔")){
+                operacion += String.valueOf(exp.charAt(i));
+            }
+            
+            operaciones.add(operacion); //agrego la operacion a la izq de la flecha a la lista
+            
+            //agregar las demas operaciones
+        }
+        
+        return operaciones;
+    }
+    
+    public List identifiers(String exp){ // crea una lista con los elementos que van en el header de la tabla
+        List identifiers = new ArrayList();
+        
+        for(int i = 0; i < this.variables.size(); i++){ //recorre la lista de variables y las agrega a la nueva lista
+            identifiers.add(variables.get(i));
+        }
+        
+        //recorre la lista de expresiones y las agrega a la nueva lista
+        
+        identifiers.add(exp); //agrega la expresion a la lista.
+        
+        return identifiers;
     }
     
     private boolean validar_operadores(String caracter) {

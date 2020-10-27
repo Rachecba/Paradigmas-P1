@@ -168,11 +168,12 @@ TablaVerdad tabla_verdad = new TablaVerdad();
         System.out.println("Mostrando Tabla");
         DefaultTableModel model = new DefaultTableModel();
         
-        model.setColumnIdentifiers(this.tabla_verdad.getVariables().toArray());
-
+        model.setColumnIdentifiers(this.tabla_verdad.identifiers(this.field.getText()).toArray());
+        
         
         model.setColumnCount(this.tabla_verdad.getCantidad_columnas());
         model.setRowCount(this.tabla_verdad.getCantidad_filas());
+        
         this.table.setModel(model);
 
         for (int i = 0; i < model.getRowCount(); i++) {
