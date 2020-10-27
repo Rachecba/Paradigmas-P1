@@ -127,7 +127,7 @@ public class TablaVerdad {
 //        }
 //        return vector_and;
 //    }
-        
+    
     public char obtener_posicion(int i, int j){
         char posicion = 'F';
         if(this.tabla[i][j]==true){
@@ -149,7 +149,7 @@ public class TablaVerdad {
 //        }
 //        return vector_or;
 //    }
-    
+
     public List obtener_variables(String exp) {
         List variables = new ArrayList();
         for(int i = 0; i< exp.length(); i++){

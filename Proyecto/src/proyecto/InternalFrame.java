@@ -176,25 +176,25 @@ TablaVerdad tabla_verdad = new TablaVerdad();
     
     public void simplificar(){}
 
-      public static void main(String args[]) {
-       
-        JFrame v = new JFrame("Prueba JInternalFrame");
-        JDesktopPane dp = new JDesktopPane();
-        v.getContentPane().add(dp);
-        JPanel p = new JPanel();
-        p.setLayout(new FlowLayout());
-        p.add (new JLabel("Una etiqueta"));
-        p.add (new JTextField(10));
-        dp.add(new InternalFrame("Prueba"));
-        v.setSize(1000,1000);
-        v.setVisible(true);
-        v.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new InternalFrame("Prueba").setVisible(true);
-            }
-        });
-    }
+//      public static void main(String args[]) {
+//       
+//        JFrame v = new JFrame("Prueba JInternalFrame");
+//        JDesktopPane dp = new JDesktopPane();
+//        v.getContentPane().add(dp);
+//        JPanel p = new JPanel();
+//        p.setLayout(new FlowLayout());
+//        p.add (new JLabel("Una etiqueta"));
+//        p.add (new JTextField(10));
+//        dp.add(new InternalFrame("Prueba"));
+//        v.setSize(1000,1000);
+//        v.setVisible(true);
+//        v.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new InternalFrame("Prueba").setVisible(true);
+//            }
+//        });
+//    }
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
