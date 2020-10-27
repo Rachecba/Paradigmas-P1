@@ -10,6 +10,7 @@ import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -138,10 +139,11 @@ TablaVerdad tabla_verdad = new TablaVerdad();
         this.tabla_verdad.setExpresion(exp);
         Expresion expresion = new Expresion(exp);
         
-        if(expresion.validar_expresion()==true){
-            System.out.println("CORRECTO");
+        if(expresion.validar_expresion(exp)==true){
+             JOptionPane.showMessageDialog(null,"  Expresion Correcta!!");
         }else{
-            System.out.println("INCORRECTO");
+           
+             JOptionPane.showMessageDialog(null,"  Expresion Incorrecta!!");
         }
         tablaVerdad();
 
