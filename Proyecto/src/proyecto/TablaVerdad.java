@@ -15,6 +15,7 @@ public class TablaVerdad {
     private int cantidad_filas;
     private int cantidad_columnas;
     private List variables;
+    private List variablessolas;
     private String expresion;
     private boolean[][] tabla;
     
@@ -26,6 +27,7 @@ public class TablaVerdad {
         this.cantidad_filas = 0;
         this.cantidad_columnas = 0;
         this.variables = new ArrayList();
+        this.variablessolas = new ArrayList();
         this.expresion = "";
         this.tabla = new boolean[1][1];
     }
@@ -46,7 +48,9 @@ public class TablaVerdad {
     public void setExpresion(String expresion) {
         this.expresion = expresion;
         obtener_operaciones(expresion);
+        this.variablessolas = obtener_variables(expresion);
         this.variables = obtener_variables(expresion);
+        identifiers();
         this.tabla = construccion_tabla(this.cantidad_filas);
     }
     
@@ -189,10 +193,11 @@ public class TablaVerdad {
             }
         }
         this.cantidad_filas = (variables.size());
+
         return variables;
     }
     
-    public List identifiers(){ // crea una lista con los elementos que van en el header de la tabla
+    public void identifiers(){ // crea una lista con los elementos que van en el header de la tabla
         List identifiers = new ArrayList();
         
         for(int i = 0; i < this.variables.size(); i++){ //recorre la lista de variables y las agrega a la nueva lista
@@ -203,8 +208,8 @@ public class TablaVerdad {
             identifiers.add(exprSep.get(i));
         }
         //recorre la lista de expresiones y las agrega a la nueva lista
-        
-        return identifiers;
+        this.variables=identifiers;
+        //return identifiers;
     }
     
     private boolean validar_operadores(String caracter) {

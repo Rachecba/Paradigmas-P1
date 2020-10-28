@@ -159,7 +159,7 @@ public class InternalFrame extends javax.swing.JInternalFrame {
     private void verificarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verificarBtnMouseClicked
         String exp = this.field.getText();
         
-//        this.tabla_verdad.setExpresion(exp);
+        this.tabla_verdad.setExpresion(exp);
         Expresion expresion = new Expresion(exp);
         
         if(expresion.validar_expresion(exp)==true){
@@ -187,7 +187,15 @@ public class InternalFrame extends javax.swing.JInternalFrame {
         System.out.println("Mostrando Tabla");
         DefaultTableModel model = new DefaultTableModel();
         
+<<<<<<< Updated upstream
         model.setColumnIdentifiers(this.tabla_verdad.identifiers().toArray());
+=======
+<<<<<<< HEAD
+        model.setColumnIdentifiers((this.tabla_verdad.getVariables().toArray()));
+=======
+        model.setColumnIdentifiers(this.tabla_verdad.identifiers().toArray());
+>>>>>>> 1ccae8e7457f4fc2992e8ec1087764dc18db7d68
+>>>>>>> Stashed changes
         
         model.setColumnCount(this.tabla_verdad.getCantidad_columnas());
         model.setRowCount(this.tabla_verdad.getCantidad_filas());
