@@ -23,6 +23,7 @@ public class TablaVerdad {
     private Stack<String> expr = new Stack<>();
     private Stack<Character> operadores = new Stack<>();
     private List<String> exprSep = new ArrayList<>();
+    private String simplificado;
     
     public TablaVerdad(){
         this.cantidad_filas = 0;
@@ -47,7 +48,7 @@ public class TablaVerdad {
     }
     
     public void setExpresion(String expresion) {
-        //En este metodo no solo seteams la expresion, sino que inicialzamos la tabla, seleccionamos las variables y obtenemos las operaciones de 
+        //En este metodo no solo seteams la expresion, sino que inicialzamos la tabla, seleccionamos las variables y obtenemos las operaciones de
         //la expresion.
         this.expresion = expresion;
         obtener_operaciones(expresion);
@@ -82,7 +83,7 @@ public class TablaVerdad {
         return variables;
     }
     
-       public List getVariablessolas() {
+    public List getVariablessolas() {
         return variablessolas;
     }
     
@@ -105,19 +106,19 @@ public class TablaVerdad {
     public void setOperadores(Stack<Character> operadores) {
         this.operadores = operadores;
     }
-
+    
     public List<String> getExprSep() {
         return exprSep;
     }
-
+    
     public void setExprSep(List<String> exprSep) {
         this.exprSep = exprSep;
     }
-   
+    
     
     public boolean[][] construccion_tabla(int tam){
         //En este metodo construimos la tabla en una matriz booleana
-        this.cantidad_columnas=((int) Math.pow(2, tam)); 
+        this.cantidad_columnas=((int) Math.pow(2, tam));
         boolean[][] tabla = new boolean[tam][cantidad_columnas];
         int aux2 = 1;
         int aux1 = cantidad_columnas / (int) Math.pow(2, aux2);
@@ -158,7 +159,7 @@ public class TablaVerdad {
         }
         return posicion;
     }
-
+    
     public List obtener_variables(String exp) {
         //Se encarga de obtener las variables de la expresion y lo guarda en una lista llamada variables_filassolas
         List variables = new ArrayList();
@@ -187,7 +188,7 @@ public class TablaVerdad {
         //return identifiers;
     }
     
-    private boolean validar_operadores(String caracter) { 
+    private boolean validar_operadores(String caracter) {
         //Realiza la validacion para obtener los operadores de la expresion
         
         if (caracter.equals("<") || caracter.equals("=") || caracter.equals("-") || caracter.equals(">")||
@@ -258,7 +259,7 @@ public class TablaVerdad {
                         while (operadores.peek() != '('){
                             expr.push("(" + operador(operadores.pop(),
                                     expr.pop(),
-                                    expr.pop())  + ")");
+                                    expr.pop(),"op2")  + ")");
                         }
                         exprSep.add(expr.peek());
                         operadores.pop();
@@ -271,7 +272,7 @@ public class TablaVerdad {
                                         operadores.peek()))
                             expr.push(operador(operadores.pop(),
                                     expr.pop(),
-                                    expr.pop()));
+                                    expr.pop(),"op2"));
                         
                         operadores.push(expresionChar[i]);
                         break;
@@ -282,7 +283,7 @@ public class TablaVerdad {
         while (!operadores.empty())
             expr.push(operador(operadores.pop(),
                     expr.pop(),
-                    expr.pop()));
+                    expr.pop(),"op2"));
         
         if(expr.size() == 1 && exprSep.isEmpty()){
             exprSep = expr;
@@ -295,6 +296,8 @@ public class TablaVerdad {
         if(exprSep.size() > 1 && exprSep.get(exprSep.size()-1).equals(exprSep.get(exprSep.size()-2))){
             exprSep.remove(exprSep.size()-2);
         }
+        
+        simplificacionVariables(expr);
     }
     
     public static boolean precedencia(char op1, char op2)
@@ -308,24 +311,88 @@ public class TablaVerdad {
         return true;
     }
     
-    public static String operador(char op, String b, String a)
+    public static String operador(char op, String b, String a, String panel)
     {
-        switch (op)
-        {
-            case '∨':
-                return a +  "∨" +  b;
-            case '∧':
-                return a +  "∧" +  b;
-            case '⊻':
-                return a +  "⊻" +  b;
-            case '⇒':
-                return a +  "⇒" +  b;
-            case '⇔':
-                return a +  "⇔" +  b;
-            case '¬':
-                return "¬" + a;
-            default:
-                return "";
+        if(panel.equals("op1")){
+            switch (op)
+            {
+                case '+':
+                    return a +  "+" +  b;
+                case '*':
+                    return a +  "*" +  b;
+                case '#':
+                    return a +  "#" +  b;
+                case '⇒':
+                    return a +  "⇒" +  b;
+                case '⇔':
+                    return a +  "⇔" +  b;
+                case '¬':
+                    return "¬" + a;
+                default:
+                    return "";
+            }
+        } else {
+            switch (op)
+            {
+                case '∨':
+                    return a +  "∨" +  b;
+                case '∧':
+                    return a +  "∧" +  b;
+                case '⊻':
+                    return a +  "⊻" +  b;
+                case '⇒':
+                    return a +  "⇒" +  b;
+                case '⇔':
+                    return a +  "⇔" +  b;
+                case '¬':
+                    return "¬" + a;
+                default:
+                    return "";
+            }
+        }
+    }
+    
+    /*Este metodo se encarga de simplificar al maximo una expresion dada*/
+    public  void simplificacionVariables(Stack<String> stack){
+        String exp;
+        char[] expresionChar;
+        
+        exp = stack.peek();
+        exp = exp.replaceAll(" ", "");
+        
+        //Opcion 1: A + A = A
+        if(exp.split("[a-z]\\+[a-z]").length > 1){
+            expresionChar = exp.toCharArray();
+            if(expresionChar[1] == expresionChar[3]){
+                simplificado = exp.replaceAll("[a-z]\\+[a-z]", String.valueOf(expresionChar[1]));
+            }
+        }
+        
+        //Opcion 2: A * A = A
+        if(exp.split("[a-z]\\*[a-z]").length > 1){
+            expresionChar = exp.toCharArray();
+            if(expresionChar[1] == expresionChar[3]){
+                simplificado = exp.replaceAll("[a-z]\\*[a-z]", String.valueOf(expresionChar[1]));
+            }
+        }
+        
+        //Opcion 3: (A+B)*(A+C) = A+(B*C)
+        if(exp.split("\\([a-z]\\+[a-z]\\)\\*\\([a-z]\\+[a-z]\\)").length > 1){
+            expresionChar = exp.toCharArray();
+            if(expresionChar[2] == expresionChar[8] && expresionChar[4] != expresionChar[10]){
+                simplificado = exp.replaceAll("\\([a-z]\\+[a-z]\\)\\*\\([a-z]\\+[a-z]\\)",
+                        String.valueOf(expresionChar[2]) + "+(" + String.valueOf(expresionChar[4]) +
+                                "*" + String.valueOf(expresionChar[10]) + ")");
+            }
+        }
+        
+        if(exp.split("\\([a-z]\\*[a-z]\\)\\+\\([a-z]\\*[a-z]\\)").length > 1){
+            expresionChar = exp.toCharArray();
+            if(expresionChar[2] == expresionChar[8] && expresionChar[4] != expresionChar[10]){
+                simplificado = exp.replaceAll("\\([a-z]\\*[a-z]\\)\\+\\([a-z]\\*[a-z]\\)",
+                        String.valueOf(expresionChar[2]) + "*(" + String.valueOf(expresionChar[4]) +
+                                "+" + String.valueOf(expresionChar[10]) + ")");
+            }
         }
     }
 }
