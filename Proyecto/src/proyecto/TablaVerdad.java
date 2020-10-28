@@ -45,6 +45,7 @@ public class TablaVerdad {
     
     public void setExpresion(String expresion) {
         this.expresion = expresion;
+        obtener_operaciones(expresion);
         this.variables = obtener_variables(expresion);
         this.tabla = construccion_tabla(this.cantidad_filas);
     }
@@ -191,16 +192,17 @@ public class TablaVerdad {
         return variables;
     }
     
-    public List identifiers(String exp){ // crea una lista con los elementos que van en el header de la tabla
+    public List identifiers(){ // crea una lista con los elementos que van en el header de la tabla
         List identifiers = new ArrayList();
         
         for(int i = 0; i < this.variables.size(); i++){ //recorre la lista de variables y las agrega a la nueva lista
             identifiers.add(variables.get(i));
         }
         
+        for(int i = 0; i < this.exprSep.size(); i++){
+            identifiers.add(exprSep.get(i));
+        }
         //recorre la lista de expresiones y las agrega a la nueva lista
-        
-        identifiers.add(exp); //agrega la expresion a la lista.
         
         return identifiers;
     }

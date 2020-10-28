@@ -8,6 +8,7 @@ package proyecto;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.DefaultListModel;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -186,8 +187,7 @@ public class InternalFrame extends javax.swing.JInternalFrame {
         System.out.println("Mostrando Tabla");
         DefaultTableModel model = new DefaultTableModel();
         
-        model.setColumnIdentifiers(this.tabla_verdad.identifiers(this.field.getText()).toArray());
-        
+        model.setColumnIdentifiers((Vector) this.tabla_verdad.identifiers());
         
         model.setColumnCount(this.tabla_verdad.getCantidad_columnas());
         model.setRowCount(this.tabla_verdad.getCantidad_filas());
