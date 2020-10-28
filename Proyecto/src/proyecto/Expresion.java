@@ -19,7 +19,9 @@ public class Expresion {
     public void setExpresion(String expresion) {
         this.expresion = expresion;
     }
-    
+    //Valida Expresion llama a los metodos valida_sintaxis y valida_parentesis
+    //de esta manera puede revisar la expresion de una manera completa 
+    //
     
     public boolean validar_expresion(String s){
         boolean result = true;
@@ -32,7 +34,9 @@ public class Expresion {
         if(!result)return false;
         return true;
     }
-    
+    //Metodo valida parentesis 
+    //Este metodo valida que los parentis tenga su correcta pareja 
+    //y si se abre uno parentesis se cierre de manera correcta  
     private boolean valida_parentesis(String s) {
         int cont = 0;
         for(char c : s.toCharArray()){
@@ -43,7 +47,9 @@ public class Expresion {
         }
         return cont != 0;
     }
-    
+    //Valida la Sintaxis de la expresion logica 
+    //este metodo evalua la estructura de la expresion 
+    // y valida que tenga un correcto uso de la reglas de operadores logicos
     private boolean valida_rsintaxis(String s){
         boolean notEmpty = true;
         try {
