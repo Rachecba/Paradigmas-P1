@@ -195,7 +195,7 @@ public class InternalFrame extends javax.swing.JInternalFrame {
         this.table.setModel(model);
 
         for (int i = 0; i < model.getRowCount(); i++) {
-            for (int j = 0; j < model.getColumnCount(); j++) {
+            for (int j = 0; j < this.tabla_verdad.getCantidad_filassolas(); j++) {
                 this.table.setValueAt(this.tabla_verdad.obtener_posicion(i, j), i, j);
             }
         }
@@ -207,7 +207,7 @@ public class InternalFrame extends javax.swing.JInternalFrame {
     }
     
     public void mintermino(){
-        List variables = this.tabla_verdad.getVariables();
+        List variables = this.tabla_verdad.getVariablessolas();
         List terminos = new ArrayList();
         String termino;
         String mintermino = "";
@@ -239,7 +239,7 @@ public class InternalFrame extends javax.swing.JInternalFrame {
         
         for(int i = 0; i < table.getRowCount(); i++){
             
-            if(table.getValueAt(i, table.getColumnCount()-1).equals('V')){
+            if(table.getValueAt(i, variables.size()-1).equals('V')){
                 if(!(i == table.getRowCount() - 1)){
                     mintermino += "(" + terminos.get(i) + ")" + " + ";
                 }else{
@@ -254,7 +254,7 @@ public class InternalFrame extends javax.swing.JInternalFrame {
     }
     
     public void maxtermino(){
-        List variables = this.tabla_verdad.getVariables();
+        List variables = this.tabla_verdad.getVariablessolas();
         List terminos = new ArrayList();
         String termino;
         String maxtermino = "";
@@ -298,7 +298,7 @@ public class InternalFrame extends javax.swing.JInternalFrame {
         
         for(int i = 0; i < table.getRowCount(); i++){
             
-            if(table.getValueAt(i, table.getColumnCount()-1).equals('F')){
+            if(table.getValueAt(i, variables.size()-1).equals('F')){
                 maxtermino += "(" + terminos.get(i) + ") ";
             }
         }

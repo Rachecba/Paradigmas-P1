@@ -14,6 +14,7 @@ public class TablaVerdad {
     
     private int cantidad_filas;
     private int cantidad_columnas;
+    private int cantidad_filassolas;
     private List variables;
     private List variablessolas;
     private String expresion;
@@ -51,7 +52,11 @@ public class TablaVerdad {
         this.variablessolas = obtener_variables(expresion);
         this.variables = obtener_variables(expresion);
         identifiers();
-        this.tabla = construccion_tabla(this.cantidad_filas);
+        this.tabla = construccion_tabla(this.cantidad_filassolas);
+    }
+    
+    public int getCantidad_filassolas() {
+        return cantidad_filassolas;
     }
     
     
@@ -73,6 +78,10 @@ public class TablaVerdad {
     
     public List getVariables() {
         return variables;
+    }
+    
+       public List getVariablessolas() {
+        return variablessolas;
     }
     
     public void setVariables(List variables) {
@@ -192,8 +201,7 @@ public class TablaVerdad {
                 variables.add(exp.charAt(i));
             }
         }
-        this.cantidad_filas = (variables.size());
-
+        this.cantidad_filassolas = (variables.size());
         return variables;
     }
     
@@ -208,6 +216,7 @@ public class TablaVerdad {
             identifiers.add(exprSep.get(i));
         }
         //recorre la lista de expresiones y las agrega a la nueva lista
+        this.cantidad_filas=identifiers.size();
         this.variables=identifiers;
         //return identifiers;
     }
