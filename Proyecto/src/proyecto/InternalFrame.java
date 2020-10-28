@@ -187,16 +187,8 @@ public class InternalFrame extends javax.swing.JInternalFrame {
         System.out.println("Mostrando Tabla");
         DefaultTableModel model = new DefaultTableModel();
         
-<<<<<<< Updated upstream
-        model.setColumnIdentifiers(this.tabla_verdad.identifiers().toArray());
-=======
-<<<<<<< HEAD
         model.setColumnIdentifiers((this.tabla_verdad.getVariables().toArray()));
-=======
-        model.setColumnIdentifiers(this.tabla_verdad.identifiers().toArray());
->>>>>>> 1ccae8e7457f4fc2992e8ec1087764dc18db7d68
->>>>>>> Stashed changes
-        
+
         model.setColumnCount(this.tabla_verdad.getCantidad_columnas());
         model.setRowCount(this.tabla_verdad.getCantidad_filas());
         
