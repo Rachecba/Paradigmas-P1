@@ -28,13 +28,13 @@ import javax.swing.table.DefaultTableModel;
  * @author rbasu
  */
 public class InternalFrame extends javax.swing.JInternalFrame {
-
+    //Creamos un objeto tabla de verdad que usaremos para realizar las operaciones necesarias.
     TablaVerdad tabla_verdad = new TablaVerdad();
     DefaultListModel modeloMin = new DefaultListModel();
     DefaultListModel modeloMax = new DefaultListModel();
 
     public InternalFrame(String title) {
-        
+       
         initComponents();
         this.setTitle(title);
         this.setVisible(true);
@@ -158,7 +158,7 @@ public class InternalFrame extends javax.swing.JInternalFrame {
 
     private void verificarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verificarBtnMouseClicked
         String exp = this.field.getText();
-        
+        //Acá, inicializamos la tabla de verdad con la expresion que ingresa el usuario y se valida si la expresion es correcta
         this.tabla_verdad.setExpresion(exp);
         Expresion expresion = new Expresion(exp);
         
@@ -169,9 +169,9 @@ public class InternalFrame extends javax.swing.JInternalFrame {
            
              JOptionPane.showMessageDialog(null,"  Expresion Incorrecta!!");
         }
-        tablaVerdad();
-        mintermino();
-        maxtermino();
+        tablaVerdad();//Metodo de dibuja la tabla de verdad
+        mintermino(); // Metodo que muestra los terminos minimos
+        maxtermino(); // Metodo de muestra los terminos maximos
         
     }//GEN-LAST:event_verificarBtnMouseClicked
 
@@ -184,21 +184,21 @@ public class InternalFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_verificarBtnActionPerformed
 
     public void tablaVerdad(){
-        System.out.println("Mostrando Tabla");
         DefaultTableModel model = new DefaultTableModel();
-        
+        //Se llenan los identificadores de columnas con las variables y expresiones
         model.setColumnIdentifiers((this.tabla_verdad.getVariables().toArray()));
 
         model.setColumnCount(this.tabla_verdad.getCantidad_columnas());
         model.setRowCount(this.tabla_verdad.getCantidad_filas());
         
         this.table.setModel(model);
-
+        //Se llenan las filas y columnas
         for (int i = 0; i < model.getRowCount(); i++) {
             for (int j = 0; j < this.tabla_verdad.getCantidad_filassolas(); j++) {
                 this.table.setValueAt(this.tabla_verdad.obtener_posicion(i, j), i, j);
             }
         }
+        //Se centra el contenido de la tabla
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         for(int i = 0; i < this.table.getColumnCount();i++){

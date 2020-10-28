@@ -47,6 +47,8 @@ public class TablaVerdad {
     }
     
     public void setExpresion(String expresion) {
+        //En este metodo no solo seteams la expresion, sino que inicialzamos la tabla, seleccionamos las variables y obtenemos las operaciones de 
+        //la expresion.
         this.expresion = expresion;
         obtener_operaciones(expresion);
         this.variablessolas = obtener_variables(expresion);
@@ -111,21 +113,11 @@ public class TablaVerdad {
     public void setExprSep(List<String> exprSep) {
         this.exprSep = exprSep;
     }
-    
-    private char[] calcular_negacion(char operador[]){
-        char vector_negado [] = {};
-        for(int i = 0; i < 16;i++){
-            if(operador[i]=='V')
-                vector_negado[i] = 'F';
-            else
-                vector_negado[i] = 'V';
-        }
-        return vector_negado;
-    }
+   
     
     public boolean[][] construccion_tabla(int tam){
-        
-        this.cantidad_columnas=((int) Math.pow(2, tam));
+        //En este metodo construimos la tabla en una matriz booleana
+        this.cantidad_columnas=((int) Math.pow(2, tam)); 
         boolean[][] tabla = new boolean[tam][cantidad_columnas];
         int aux2 = 1;
         int aux1 = cantidad_columnas / (int) Math.pow(2, aux2);
@@ -157,44 +149,18 @@ public class TablaVerdad {
         return t2;
     }
     
-//    private char[] calcular_and(char operador1[], char operador2[]){
-//        char vector_and [] = {};
-//        for(int i = 0; i < 16;i++){
-//            if(operador1[i]=='V'&&operador2[i]=='V')
-//                vector_and[i] = 'V';
-//            else  if(operador1[i]=='V'&&operador2[i]=='F')
-//                vector_and[i] = 'F';
-//            else  if(operador1[i]=='F'&&operador2[i]=='V')
-//                vector_and[i] = 'F';
-//            else  if(operador1[i]=='F'&&operador2[i]=='F')
-//                vector_and[i] = 'F';
-//        }
-//        return vector_and;
-//    }
     
     public char obtener_posicion(int i, int j){
+        //Este metodo nos permite obtener un valor de verdad de la tabla según sea su posicion i j
         char posicion = 'F';
         if(this.tabla[i][j]==true){
             posicion='V';
         }
         return posicion;
     }
-//    private char[] calcular_or(char operador1[], char operador2[]){
-//         char vector_or [] = {};
-//        for(int i = 0; i < 16;i++){
-//            if(operador1[i]=='V'&&operador2[i]=='V')
-//                vector_or[i] = 'V';
-//            else  if(operador1[i]=='V'&&operador2[i]=='F')
-//                vector_or[i] = 'V';
-//            else  if(operador1[i]=='F'&&operador2[i]=='V')
-//                vector_or[i] = 'V';
-//            else  if(operador1[i]=='F'&&operador2[i]=='F')
-//                vector_or[i] = 'F';
-//        }
-//        return vector_or;
-//    }
-    
+
     public List obtener_variables(String exp) {
+        //Se encarga de obtener las variables de la expresion y lo guarda en una lista llamada variables_filassolas
         List variables = new ArrayList();
         for(int i = 0; i< exp.length(); i++){
             if(!this.validar_operadores(String.valueOf(exp.charAt(i)))){
@@ -221,7 +187,8 @@ public class TablaVerdad {
         //return identifiers;
     }
     
-    private boolean validar_operadores(String caracter) {
+    private boolean validar_operadores(String caracter) { 
+        //Realiza la validacion para obtener los operadores de la expresion
         
         if (caracter.equals("<") || caracter.equals("=") || caracter.equals("-") || caracter.equals(">")||
                 caracter.equals("+") || caracter.equals("*")|| caracter.equals(")") || caracter.equals("(")||
