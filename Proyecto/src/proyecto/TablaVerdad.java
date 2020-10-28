@@ -275,8 +275,8 @@ public class TablaVerdad {
                             expr.push("(" + operador(operadores.pop(),
                                     expr.pop(),
                                     expr.pop())  + ")");
-                            exprSep.push(expr.peek());
                         }
+                        exprSep.push(expr.peek());
                         operadores.pop();
                         break;
                     case ' ':
