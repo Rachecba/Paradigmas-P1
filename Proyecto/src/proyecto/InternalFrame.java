@@ -159,7 +159,6 @@ public class InternalFrame extends javax.swing.JInternalFrame {
     private void verificarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verificarBtnMouseClicked
         String exp = this.field.getText();
         
-        this.tabla_verdad.setExpresion(exp);
         Expresion expresion = new Expresion(exp);
         
         if(expresion.validar_expresion(exp)==true){

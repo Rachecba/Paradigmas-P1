@@ -316,7 +316,7 @@ public class TablaVerdad {
             exprSep.add(expr.peek());
         }
         
-        if(exprSep.get(exprSep.size()-1).equals(exprSep.get(exprSep.size()-2))){
+        if(exprSep.size() > 1 && exprSep.get(exprSep.size()-1).equals(exprSep.get(exprSep.size()-2))){
             exprSep.remove(exprSep.size()-2);
         }
     }
