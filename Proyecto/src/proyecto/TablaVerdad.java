@@ -20,7 +20,7 @@ public class TablaVerdad {
     
     private Stack<String> expr = new Stack<>();
     private Stack<Character> operadores = new Stack<>();
-    private Stack<String> exprSep = new Stack<>();
+    private List<String> exprSep = new ArrayList<>();
     
     public TablaVerdad(){
         this.cantidad_filas = 0;
@@ -89,12 +89,12 @@ public class TablaVerdad {
     public void setOperadores(Stack<Character> operadores) {
         this.operadores = operadores;
     }
-    
-    public Stack<String> getExprSep() {
+
+    public List<String> getExprSep() {
         return exprSep;
     }
-    
-    public void setExprSep(Stack<String> exprSep) {
+
+    public void setExprSep(List<String> exprSep) {
         this.exprSep = exprSep;
     }
     
@@ -276,7 +276,7 @@ public class TablaVerdad {
                                     expr.pop(),
                                     expr.pop())  + ")");
                         }
-                        exprSep.push(expr.peek());
+                        exprSep.add(expr.peek());
                         operadores.pop();
                         break;
                     case ' ':
@@ -306,6 +306,10 @@ public class TablaVerdad {
         
         if(expresionChar[expresionChar.length-1] != ')' && exprSep.isEmpty()){
             exprSep.add(expr.peek());
+        }
+        
+        if(exprSep.get(exprSep.size()-1).equals(exprSep.get(exprSep.size()-2))){
+            exprSep.remove(exprSep.size()-2);
         }
         
         return expr.pop();
