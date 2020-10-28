@@ -240,7 +240,12 @@ public class InternalFrame extends javax.swing.JInternalFrame {
         for(int i = 0; i < table.getRowCount(); i++){
             
             if(table.getValueAt(i, table.getColumnCount()-1).equals('V')){
-                mintermino += "(" + terminos.get(i) + ")" + " + ";
+                if(!(i == table.getRowCount() - 1)){
+                    mintermino += "(" + terminos.get(i) + ")" + " + ";
+                }else{
+                    mintermino += "(" + terminos.get(i) + ")";
+                }
+                
             }
         }
         
@@ -261,9 +266,21 @@ public class InternalFrame extends javax.swing.JInternalFrame {
             
             for(int j = 0; j < variables.size(); j++){ //Columnas
                 if(this.table.getValueAt(i, j).equals('V')){
-                    termino += this.table.getColumnName(j) + " + ";
+                    
+                    if(!(j == variables.size()-1)){
+                        termino += this.table.getColumnName(j) + " + ";
+                    }else{
+                        termino += this.table.getColumnName(j);
+                    }
+                    
                 }else{
-                    termino += this.table.getColumnName(j) + "¬ + ";
+                    
+                    if(!(j == variables.size()-1)){
+                        termino += this.table.getColumnName(j) + "¬ + ";
+                    }else{
+                        termino += this.table.getColumnName(j) + "¬";
+                    }
+
                 }
             }
             
