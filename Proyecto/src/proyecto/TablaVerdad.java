@@ -232,7 +232,8 @@ public class TablaVerdad {
             return false;
     }
     
-    public String obtener_operaciones(String expression) {
+    /*Este metodo se encarga de recibir la expresion completa y separarla en partes para ser evaluada.*/
+    public void obtener_operaciones(String expression) {
         char[] expresionChar = expression.toCharArray();
         exprSep.clear();
         expr.clear();
@@ -327,8 +328,6 @@ public class TablaVerdad {
         if(exprSep.get(exprSep.size()-1).equals(exprSep.get(exprSep.size()-2))){
             exprSep.remove(exprSep.size()-2);
         }
-        
-        return expr.pop();
     }
     
     public static boolean precedencia(char op1, char op2)
