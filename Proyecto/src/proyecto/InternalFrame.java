@@ -6,6 +6,7 @@
 package proyecto;
 
 import java.awt.FlowLayout;
+import static java.lang.Character.isLetter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -59,6 +60,8 @@ public class InternalFrame extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         maxList = new javax.swing.JList<>();
+        jLabel3 = new javax.swing.JLabel();
+        simplificacionField = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -113,6 +116,14 @@ public class InternalFrame extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(maxList);
 
+        jLabel3.setText("Simplificacion");
+
+        simplificacionField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simplificacionFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -121,18 +132,21 @@ public class InternalFrame extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(field, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23)
+                        .addComponent(verificarBtn))
+                    .addComponent(jLabel3)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(simplificacionField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(field, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(23, 23, 23)
-                                .addComponent(verificarBtn))
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(0, 288, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3))
-                .addContainerGap())
+                            .addComponent(jLabel2)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,14 +158,18 @@ public class InternalFrame extends javax.swing.JInternalFrame {
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
                 .addGap(12, 12, 12)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(simplificacionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
@@ -161,6 +179,7 @@ public class InternalFrame extends javax.swing.JInternalFrame {
         String exp = this.field.getText();
         
         this.tabla_verdad.setExpresion(exp);
+        
         Expresion expresion = new Expresion(exp);
         
         if(expresion.validar_expresion(exp)==true){
@@ -171,8 +190,10 @@ public class InternalFrame extends javax.swing.JInternalFrame {
              JOptionPane.showMessageDialog(null,"  Expresion Incorrecta!!");
         }
         tablaVerdad();//Metodo de dibuja la tabla de verdad
+        //valores_operaciones();
         mintermino(); // Metodo que muestra los terminos minimos
         maxtermino(); // Metodo de muestra los terminos maximos
+        this.simplificacionField.setText(tabla_verdad.getSimplificado());
         
     }//GEN-LAST:event_verificarBtnMouseClicked
 
@@ -183,6 +204,10 @@ public class InternalFrame extends javax.swing.JInternalFrame {
     private void verificarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verificarBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_verificarBtnActionPerformed
+
+    private void simplificacionFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simplificacionFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_simplificacionFieldActionPerformed
 
     public void tablaVerdad(){
         DefaultTableModel model = new DefaultTableModel();
@@ -308,28 +333,178 @@ public class InternalFrame extends javax.swing.JInternalFrame {
            
     }
     
-    public void simplificar(){}
+  
     
     public void valores_operaciones(){
         
         List operaciones = new ArrayList();
-        operaciones = (List) table.getTableHeader(); //tomo las variables del header de la tabla
         String operacion;
+        char token;
+        int posicion = 0;
         Stack<Character> valores = new Stack<>();
+        Stack<Character> operadores = new Stack<>();
+        
+        //tomo los nombres de las columnas y los meto en la lista
+        
+        for(int a = 0; a < table.getColumnCount(); a++){
+            operaciones.add(table.getColumnName(a));
+        }
         
         
         for(int i = 0; i < table.getColumnCount(); i++){ //voy recorriendo la tabla
             for(int j = 0; j < table.getRowCount(); j++){
                 
-                operacion = (String) operaciones.get(i); //tomo la variable del header
+                operacion = (String) operaciones.get(j); //tomo la operacion del header
                 
                 if(operacion.length() > 1){ // si no es una variable, la tomo
                     
+                    //recorro el string
+                    for(int k = 0; k < operacion.length(); k++){
+                        token = operacion.charAt(k);
+                        
+                        if(isLetter(token)){ //si el char es una letra, agarro su valor de la tabla y lo meto en el stack
+                            //busco en la lista del header, en que posicion esta la variable, y la agarro de la tabla
+                            for(int m = 0; m < operaciones.size(); m++){
+                                String x = (String) operaciones.get(m);
+                                
+                                if( x.charAt(0) == token ){ //si coincide el char con el header, guardo la posicion.
+                                    posicion = m;
+                                }
+                            }
+                            
+                            //busco en la tabla la columna en la posicion 'posicion', agarro el valor de esa fila y lo meto en el stack
+                            valores.push((Character) table.getValueAt(i, posicion));
+                            
+                        }
+                        else{ //si el valor NO es una letra
+                             if(token == '('){ // si es ( lo meto al stack
+                                 operadores.push(token);
+                             }
+                             else{
+                                 if(token == ')'){ // si es ) y el primer elemento del stack no es (, evaluo los valores de ambos stack y lo guardo
+                                     while(operadores.peek() != '('){
+                                         char val2 = valores.pop();
+                                         char val1 = valores.pop();
+                                         char op = operadores.pop();
+                                         
+                                         valores.push(resolver(val1, val2, op));
+                                        
+                                         operadores.pop();
+                                     }
+                                 }
+                                 else{
+                                     if(token == '¬' || token == '∧' || token == '∨' || token == '⊻' || token == '⇒' || token == '⇔'){
+                                            
+                                            while(!operadores.isEmpty() && precedencia(token, operadores.peek())){ //evaluo la precendencia de los operadores
+                                                char val2 = valores.pop();
+                                                char val1 = valores.pop();
+                                                char op = operadores.pop();
+
+                                                valores.push(resolver(val1, val2, op));  
+                                                
+                                            }
+                                            
+                                            operadores.push(token);
+                                    }
+                                 }
+                                 
+                                while(!operadores.isEmpty() && !valores.isEmpty()){
+                                    char val2 = valores.pop();
+                                    char val1 = valores.pop();
+                                    char op = operadores.pop();
+
+                                    valores.push(resolver(val1, val2, op)); 
+                                    
+                                 }
+                             }
+                             
+                        }
+                    }
+                    
+                    //busco en la tabla la posicion de la operacion 
+                     for(int m = 0; m < operaciones.size(); m++){
+                         
+                        if(operaciones.get(m).equals(operacion)){ //si coincide el char con el header, guardo la posicion.
+                            posicion = m;
+                        }
+                    }
+                     
+                    table.setValueAt(valores.pop(), j, posicion);
+
                 }
-                
+ 
             }
         }
         
+    }
+    
+    public char resolver(char x, char y, char operando){ //valido las operaciones de V y F
+        switch(operando){
+            case '∧': 
+                if(x == 'V' && y == 'V')
+                    return 'V';
+                else
+                    if(x == 'V' && y == 'F')
+                        return 'F';
+                    else
+                        if(x == 'F' && y == 'V')
+                            return 'F';
+                        else
+                            if(x == 'F' && y == 'F')
+                                return 'F';
+                
+            case '∨':
+                if(x == 'V' && y == 'V')
+                            return 'V';
+                        else
+                            if(x == 'V' && y == 'F')
+                                return 'V';
+                            else
+                                if(x == 'F' && y == 'V')
+                                    return 'V';
+                                else
+                                    if(x == 'F' && y == 'F')
+                                        return 'F';
+                
+            case '⇒': 
+                if(x == 'V' && y == 'V')
+                            return 'V';
+                        else
+                            if(x == 'V' && y == 'F')
+                                return 'F';
+                            else
+                                if(x == 'F' && y == 'V')
+                                    return 'V';
+                                else
+                                    if(x == 'F' && y == 'F')
+                                        return 'V';
+            
+            case '⇔':
+                if(x == 'V' && y == 'V')
+                            return 'V';
+                        else
+                            if(x == 'V' && y == 'F')
+                                return 'F';
+                            else
+                                if(x == 'F' && y == 'V')
+                                    return 'F';
+                                else
+                                    if(x == 'F' && y == 'F')
+                                        return 'V';
+                
+            default:
+                return 'V';
+        }
+    }
+    
+    public boolean precedencia(char op1, char op2){
+        if (op2 == '(' || op2 == ')') {return false;}
+        if (op2 == '¬' && (op1 == '∧' || op1 == '∨' || op1 == '⇒' || op1 == '⇔')) {return false;}
+        if (op2 == '∧' && (op1 == '∨' || op1 == '⇒' || op1 == '⇔')) {return false;}
+        if ((op2 == '∨' || op2 == '⊻') && (op1 == '⇒' || op1 == '⇔')) {return false;}
+        if (op2 == '⇒' && (op1 == '⇔')) {return false;}
+        
+        return true;
     }
 
 //      public static void main(String args[]) {
@@ -357,11 +532,13 @@ public class InternalFrame extends javax.swing.JInternalFrame {
     public static javax.swing.JTextField field;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList<String> maxList;
     private javax.swing.JList<String> minList;
+    private javax.swing.JTextField simplificacionField;
     private javax.swing.JTable table;
     private javax.swing.JButton verificarBtn;
     // End of variables declaration//GEN-END:variables

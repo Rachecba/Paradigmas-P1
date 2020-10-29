@@ -185,6 +185,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="simplificacionField">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="simplificacionFieldActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -47,6 +47,10 @@ public class TablaVerdad {
         return expresion;
     }
     
+    public String getSimplificado() {
+        return simplificado;
+    }
+    
     public void setExpresion(String expresion) {
         //En este metodo no solo seteams la expresion, sino que inicialzamos la tabla, seleccionamos las variables y obtenemos las operaciones de
         //la expresion.
@@ -394,6 +398,8 @@ public class TablaVerdad {
                                 "+" + String.valueOf(expresionChar[10]) + ")");
             }
         }
+        
+       
     }
 
 }
