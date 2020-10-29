@@ -29,6 +29,7 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
     }
 //Abrir Archivo
+    //Este metodo abre el archivo txt
 
     public String AbrirArchivo(File archivos) {
         String documento = "";
@@ -49,6 +50,8 @@ public class Principal extends javax.swing.JFrame {
     }
 
     //Guardar Archivo
+    //Este Metodo guarda el Archivo de la expresion en caso que sea modificada
+    //o si bien no existiera el archivo lo crea como un txt
     public String
 
     GuardarArchivo(File archivos, String documento) {
@@ -77,7 +80,6 @@ public class Principal extends javax.swing.JFrame {
         file = new javax.swing.JButton();
         open = new javax.swing.JButton();
         save = new javax.swing.JButton();
-        print = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         archivo = new javax.swing.JMenu();
         btnAbrir = new javax.swing.JMenuItem();
@@ -117,6 +119,11 @@ public class Principal extends javax.swing.JFrame {
                 openMouseClicked(evt);
             }
         });
+        open.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openActionPerformed(evt);
+            }
+        });
         jToolBar1.add(open);
 
         save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/diskette.png"))); // NOI18N
@@ -128,13 +135,12 @@ public class Principal extends javax.swing.JFrame {
                 saveMouseClicked(evt);
             }
         });
+        save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveActionPerformed(evt);
+            }
+        });
         jToolBar1.add(save);
-
-        print.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/printer.png"))); // NOI18N
-        print.setFocusable(false);
-        print.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        print.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(print);
 
         archivo.setText("Archivo");
 
@@ -214,6 +220,8 @@ public class Principal extends javax.swing.JFrame {
         cont++;
     }//GEN-LAST:event_fileMouseClicked
 //Accion del boton cargar 
+//llama al metodo AbrirArchivo al presionar el boton cargar y imprime la expresion en el campo cosrrespondiente 
+//tambien muestra en pantalla un mensaje de error si no fuera de tipo TXT
     private void btnAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirActionPerformed
      if (seleccionar.showDialog(null, "Abrir") == JFileChooser.APPROVE_OPTION) {
 
@@ -231,6 +239,9 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAbrirActionPerformed
 //Accion del boton guardar
+//Manda a llamar al metodo GuardarArchivo y muestra un mensaje si el archivo se pudo guardar 
+// de manera correcta tmabien se puede modificar la expresion dentro del campo Field y 
+//luego poder guardar los realizados 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
           if (seleccionar.showDialog(null, "Guardar") == JFileChooser.APPROVE_OPTION) {
             archivos = seleccionar.getSelectedFile();
@@ -253,6 +264,42 @@ public class Principal extends javax.swing.JFrame {
     private void fileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fileActionPerformed
+
+    private void openActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openActionPerformed
+         if (seleccionar.showDialog(null, "Abrir") == JFileChooser.APPROVE_OPTION) {
+
+            archivos = seleccionar.getSelectedFile();
+            if (archivos.canRead()) {
+                if (archivos.getName().endsWith("txt")) {
+                    String documento = AbrirArchivo(archivos);
+                    InternalFrame.field.setText(documento);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Archivo No compatible");
+
+                }
+
+            }
+        }
+    }//GEN-LAST:event_openActionPerformed
+
+    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
+        if (seleccionar.showDialog(null, "Guardar") == JFileChooser.APPROVE_OPTION) {
+            archivos = seleccionar.getSelectedFile();
+            if (archivos.getName().endsWith("txt")) {
+               String Documento=InternalFrame.field.getText(); 
+               String mensaje=GuardarArchivo(archivos,Documento);
+               if(mensaje!=null){
+               JOptionPane.showMessageDialog(null,mensaje);
+               }else{
+               
+               JOptionPane.showMessageDialog(null,"Archivo No Compatible");
+               }
+            }else{
+            JOptionPane.showMessageDialog(null,"Guardar Documento de Texto");
+            }
+
+        }
+    }//GEN-LAST:event_saveActionPerformed
 
     
     /**
@@ -304,7 +351,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JButton open;
-    private javax.swing.JButton print;
     private javax.swing.JButton save;
     // End of variables declaration//GEN-END:variables
 
