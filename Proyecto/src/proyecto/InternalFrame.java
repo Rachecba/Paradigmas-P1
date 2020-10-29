@@ -8,6 +8,7 @@ package proyecto;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 import java.util.Vector;
 import javax.swing.DefaultListModel;
 import javax.swing.JDesktopPane;
@@ -159,6 +160,7 @@ public class InternalFrame extends javax.swing.JInternalFrame {
     private void verificarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verificarBtnMouseClicked
         String exp = this.field.getText();
         
+        this.tabla_verdad.setExpresion(exp);
         Expresion expresion = new Expresion(exp);
         
         if(expresion.validar_expresion(exp)==true){
@@ -307,6 +309,28 @@ public class InternalFrame extends javax.swing.JInternalFrame {
     }
     
     public void simplificar(){}
+    
+    public void valores_operaciones(){
+        
+        List operaciones = new ArrayList();
+        operaciones = (List) table.getTableHeader(); //tomo las variables del header de la tabla
+        String operacion;
+        Stack<Character> valores = new Stack<>();
+        
+        
+        for(int i = 0; i < table.getColumnCount(); i++){ //voy recorriendo la tabla
+            for(int j = 0; j < table.getRowCount(); j++){
+                
+                operacion = (String) operaciones.get(i); //tomo la variable del header
+                
+                if(operacion.length() > 1){ // si no es una variable, la tomo
+                    
+                }
+                
+            }
+        }
+        
+    }
 
 //      public static void main(String args[]) {
 //       
